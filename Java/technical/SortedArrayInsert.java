@@ -80,5 +80,3 @@ public class SortedArrayInsert {
         sc.close();
     }
 }
-
-}
