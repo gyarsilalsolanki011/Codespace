@@ -10,7 +10,7 @@ public class FailFastExample {
         Iterator<Integer> it = list.iterator();
         while (it.hasNext()) {
             System.out.println(it.next());
-            list.add(4);  // Structural modification during iteration
+            list.add(4); // Structural modification during iteration
         }
     }
 }

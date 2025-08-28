@@ -23,7 +23,7 @@ public class CrownPattern {
             }
 
             // Middle stars
-            stars = 2 * i - 1;
+            stars = (2 * i) - 1;
             for (int s = 1; s <= stars; s++) {
                 System.out.print("*");
             }
