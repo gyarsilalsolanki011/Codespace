@@ -1,4 +1,4 @@
-# Codspace 🚀
+# Codespace 🚀
 
 Codspace is my personal coding space — a collection of **Java, C/C++, and MySQL** directories containing important programs, snippets, and notes.  
 It serves as a quick reference for learning, practicing, and interview preparation.  
