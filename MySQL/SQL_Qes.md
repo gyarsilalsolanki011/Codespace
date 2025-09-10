@@ -137,3 +137,92 @@ JOIN Orders o ON c.customer_id = o.customer_id
 GROUP BY c.customer_id, c.name
 HAVING COUNT(o.order_id) > 3;
 ```
+
+## SQL Interview Questions With Answers 
+
+#### ⿡ How to find duplicates in a table?  
+```sql
+SELECT column_name, COUNT(*)  
+FROM table_name  
+GROUP BY column_name  
+HAVING COUNT(*) > 1;
+```
+✅ This groups rows by the column and returns only those with more than one occurrence.
+
+#### ⿢ How to delete duplicates from a table?  
+Assuming there’s no primary key:  
+```sql
+DELETE FROM table_name
+WHERE rowid NOT IN (
+  SELECT MIN(rowid)
+  FROM table_name
+  GROUP BY column_name
+);
+```
+✅ Keeps the first occurrence and deletes the rest based on rowid (use CTE + ROW_NUMBER() for other DBs).
+
+#### ⿣ Difference between UNION and UNION ALL  
+- UNION removes duplicates, but is slower.  
+- UNION ALL keeps duplicates and is faster.
+
+#### ⿤ Difference between RANK(), ROW_NUMBER(), and DENSE_RANK()  
+All are window functions used for ranking.  
+- ROW_NUMBER() – unique sequential number  
+- RANK() – same rank for ties, skips next number  
+- DENSE_RANK() – same rank for ties, no skips  
+```sql
+SELECT *, 
+  ROW_NUMBER() OVER (ORDER BY salary DESC),
+  RANK() OVER (ORDER BY salary DESC),
+  DENSE_RANK() OVER (ORDER BY salary DESC)
+FROM employees;
+```
+
+#### ⿥ How to find records in one table that aren't in another?  
+Option 1 – `NOT IN`:  
+```sql
+SELECT *
+FROM table1
+WHERE id NOT IN (SELECT id FROM table2);
+```
+  
+Option 2 – `LEFT JOIN`:  
+```sql
+SELECT t1.*
+FROM table1 t1
+LEFT JOIN table2 t2 ON t1.id = t2.id
+WHERE t2.id IS NULL;
+```
+
+#### ⿦ How to find the second highest salary in each department?  
+```sql
+SELECT department, salary
+FROM (
+  SELECT department, salary,
+         DENSE_RANK() OVER (PARTITION BY department ORDER BY salary DESC) as rank
+  FROM employees
+) ranked
+WHERE rank = 2;
+```
+
+#### ⿧ How to find employees with salary higher than their manager's?  
+```sql
+SELECT e.name
+FROM employees e
+JOIN employees m ON e.manager_id = m.id
+WHERE e.salary > m.salary;
+```
+
+#### ⿨ Difference between INNER JOIN and LEFT JOIN  
+- INNER JOIN returns only matched rows.  
+- LEFT JOIN returns all rows from the left table and NULLs for unmatched right rows.
+
+#### ⿩ Update a table and swap gender values  
+```sql
+UPDATE employees
+SET gender = CASE 
+               WHEN gender = 'Male' THEN 'Female'
+               WHEN gender = 'Female' THEN 'Male'
+             END;
+```
+***Tap 🌟 for more***
