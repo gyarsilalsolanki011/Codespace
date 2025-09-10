@@ -113,7 +113,7 @@ FROM (
 WHERE rnk <= 3;
 ```
 
-#### 5. "Write a query to calculate running total of sales per month."
+#### 15. "Write a query to calculate running total of sales per month."
 Table: `Sales(id, amount, sale_date)`
 
 Answer:
@@ -126,7 +126,7 @@ FROM Sales;
 ```
 
 
-#### 6. "Find customers who placed more than 3 orders."
+#### 16. "Find customers who placed more than 3 orders."
 Tables: `Customers(customer_id, name), Orders(order_id, customer_id)`
 
 Answer:
